@@ -1,0 +1,18 @@
+1. For each problem, describe your approach along with any issues you
+encountered and if/how you managed to solve those issues.
+
+Problem 1 (RSA Library): I implemented the helper functions for prime generation, random sampling, random choice, and the core RSA operations. For key generation, I pick two distinct primes in the given interval, compute n and Euler's totient, choose a valid public exponent that is relatively prime to the totient, and then compute the private exponent with modular inverse. I tested that decrypt(encrypt(x, n, e), n, d) returns the original character code for sample inputs. The main issue was making sure the generated keys were always valid, which I handled by only choosing exponents that are coprime with the totient.
+
+Problem 2 (Keygen Program): I wrote the driver program so it reads the lower and upper bounds from the command line, calls the RSA key generation function, and prints n, e, and d in the required format. I verified that the output is a single line of three integers that can be reused directly by the other programs.
+
+Problem 3 (Encryption Program): I wrote the encryption program so it reads plaintext from standard input, converts each character to its Unicode integer value with ord(), encrypts that integer using the public key, and prints one encrypted integer per line. I checked the program with sample text and confirmed the output can be passed into the decryption program.
+
+Problem 4 (Decryption Program): I wrote the decryption program so it reads encrypted integers from standard input, decrypts each integer with the private key, converts the result back to a character with chr(), and writes the recovered plaintext. I verified the full round trip by encrypting sample text files and then decrypting the encrypted output back to the original text.
+
+2. List any acknowledgements here.
+
+Starter code and the course libraries were provided by the instructor. I used the supplied testing structure and data files to verify the programs.
+
+3. List any other comments here.
+
+I also completed the smaller warm-up exercises included in the starter package: reverse, distance, transpose, palindrome, and sine.
