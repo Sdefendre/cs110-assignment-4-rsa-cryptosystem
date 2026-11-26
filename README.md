@@ -1,27 +1,30 @@
-# CS110 Assignment 4: RSA Cryptosystem
+# RSA Cryptosystem
 
-## Course context
-- Course: CS110
-- Semester: Spring 2026
-- Purpose: archived coursework published as part of a portfolio / academic record
+A from-scratch RSA implementation in Python: key generation, encryption and decryption, plus command-line programs that chain together with pipes.
 
-## Assignment overview
-Python coursework centered on implementing and exercising parts of an RSA cryptosystem, alongside supporting utility programs.
+## What it does
 
-## Files included
-- `decrypt.py`
-- `distance.py`
-- `encrypt.py`
-- `keygen.py`
-- `notes.txt`
-- `palindrome.py`
-- `reverse.py`
-- `rsa.py`
-- `sin.py`
-- `transpose.py`
+- **`rsa.py`**: the library. It generates primes in a range, picks two distinct primes `p` and `q`, computes `n = pq` and Euler's totient, chooses a public exponent `e` coprime to the totient, and derives the private exponent `d` as its modular inverse. Encryption and decryption use modular exponentiation.
+- **`keygen.py`**, **`encrypt.py`**, **`decrypt.py`**: command-line drivers that read standard input and write standard output.
 
-## How to run
-Run the RSA-related scripts with Python 3, for example `python3 keygen.py`, `python3 encrypt.py`, `python3 decrypt.py`, or `python3 rsa.py`.
+```sh
+python3 keygen.py 50 100                       # prints: n e d
+python3 encrypt.py <n> <e> < message.txt > secret.txt
+python3 decrypt.py <n> <d> < secret.txt         # prints the original text
+```
 
-## Notes
-This repository preserves the locally available assignment materials as they were found on disk, with obvious packaging junk like `__MACOSX` removed.
+I tested that the round trip `decrypt(encrypt(x))` returns the original text.
+
+## Concepts
+
+Number theory (primes, totients, modular inverses), modular exponentiation, and Unix-style programs composed with pipes.
+
+Also included are warm-up exercises: `reverse`, `distance`, `transpose`, `palindrome` and `sin`.
+
+## Running it
+
+These programs use the standard libraries from *Introduction to Programming in Python* (Sedgewick, Wayne & Dondero): `stdio`, `stdarray`, `stdrandom` and friends. Put those modules on your `PYTHONPATH`, then run the scripts with Python 3.
+
+## Course
+
+CS110 Introduction to Computing, UMass Boston, Spring 2026 (instructor: Swami Iyer). The instructor supplied the starter code and course libraries. My approach and notes for each problem are in [`notes.txt`](notes.txt).
